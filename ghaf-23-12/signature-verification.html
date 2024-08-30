@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signature Verification Instructions</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <a href="index.html" class="btn btn-primary mt-4 mb-4">Back to 23.12</a>
+
+        <h1 class="mt-4 mb-4">Instructions for Signature Verification</h1>
+
+        <p>In this example we verify a signature of a Ghaf package which was built and signed by themisto server. These steps can be applied to any Ghaf package.</p>
+
+        <h2 class="mt-4 mb-4">Step-by-Step Instructions:</h2>
+
+        <ol>
+            <li>
+                <p>Download and extract the package in an empty directory</p>
+                <pre>
+mkdir verify
+cd verify
+wget https://vedenemo.dev/files/releases/ghaf_23.12/ghaf-23.12_PolarFire_RISC-V.tar.xz
+tar -xf *.tar.xz
+cd ghaf-23.12_PolarFire_RISC-V
+cd image
+tar xf *.tar.xz
+ls
+                </pre>
+            </li>
+            <li>
+                <p>Download sha256tree.py script (required for calculating hashes for directory trees)</p>
+                <pre>
+wget https://raw.githubusercontent.com/tiiuae/ci-public/main/sha256tree/sha256tree.py
+                </pre>
+            </li>
+            <li>
+                <p>Create the hash of the output directory and convert to binary format</p>
+                <pre>
+python3 sha256tree.py --plain *-nixos-vm > digest.hex
+xxd -r -p digest.hex digest.bin
+                </pre>
+            </li>
+            <li>
+                <p>Decode the signature to binary format</p>
+                <pre>
+openssl enc -base64 -d -in *-zp9p5m*.signature -out signature.bin
+                </pre>
+            </li>
+            <li>
+                <p>Download the public key for themisto</p>
+                <pre>
+wget https://vedenemo.dev/files/keys/themisto.pub
+                </pre>
+            </li>
+            <li>
+                <p>Verify the signature</p>
+                <pre>
+openssl dgst -sha256 -verify themisto.pub -signature signature.bin digest.bin
+                </pre>
+            </li>
+        </ol>
+
+        <h2 class="mt-4 mb-4">Example run with output</h2>
+
+        <pre>
+[ktu@nixos:~]$ mkdir verify
+[ktu@nixos:~]$ cd verify
+...
+[ktu@nixos:~/verify/ghaf-23.12_PolarFire_RISC-V/image]$ openssl dgst -sha256 -verify themisto.pub -signature signature.bin digest.bin
+Verified OK
+[ktu@nixos:~/verify/ghaf-23.12_PolarFire_RISC-V/image]$
+        </pre>
+    </div>
+</body>
+
+</html>
