@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verifying Signature of a Binary Image</title>
+  <style>
+    pre.command {
+      background-color: #eee;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Instructions for Signature Verification of a Binary Image</h1>
+
+  <p>This guide demonstrates how to verify the signature of a Ghaf package built and signed by the themisto server. These steps can be applied to any Ghaf package.</p>
+
+  <h2>Prerequisites</h2>
+  <ul>
+    <li>A terminal program (e.g., Command Prompt, Terminal)</li>
+    <li>Permissions to download and execute files</li>
+    <li>wget (download tool)</li>
+    <li>python3 (programming language)</li>
+    <li>openssl (cryptographic library)</li>
+  </ul>
+
+  <h2>Download the Public Key</h2>
+  <p>Download the themisto public key. This key is used to verify the signature.</p>
+  <a href="https://vedenemo.dev/files/keys/themisto.pub">Download themisto.pub</a>
+
+  <h2>Steps</h2>
+
+  <h3>1. Download and Extract the Package</h3>
+
+  <pre class="command">
+    mkdir verify
+    cd verify
+    wget https://vedenemo.dev/files/releases/ghaf_24.03/ghaf-24.03_Lenovo_X1_Carbon_Gen11.tar.xz
+    tar -xf *.tar.xz
+    cd ghaf-24.03_Lenovo_X1_Carbon_Gen11
+    cd Image
+    tar xf *.tar.xz
+    ls
+  </pre>
+
+  <p>This creates a directory named "verify" and downloads the Ghaf package. It then extracts the package contents.</p>
+
+  <h3>2. Download sha256tree.py script</h3>
+  <p>Download the `sha256tree.py` script. This script calculates the hash of the image directory.</p>
+  <a href="https://raw.githubusercontent.com/tiiuae/ci-public/main/sha256tree/sha256tree.py">Download sha256tree.py</a> (You can save this script locally and use it in the next step)
+
+  <h3>3. Create the Hash of the Output Directory</h3>
+
+  <pre class="command">
+    python3 sha256tree.py --plain x038z51wl2cpb06g7v5wg52r85w1v0aq-ghaf-host-disko-images > digest.hex
+    xxd -r -p digest.hex digest.bin
+  </pre>
+
+  <p>This script calculates the hash of the "x038z51wl2cpb06g7v5wg52r85w1v0aq-ghaf-host-disko-images" directory and saves it as "digest.hex" and "digest.bin".</p>
+
+  <h3>4. Decode the Signature</h3>
+
+  <pre class="command">
+    openssl enc -base64 -d -in h63fl926x4nl9q1j3lv0gqim7j8yq32j-x038z51wl2cpb06g7v5wg52r85w1v0aq-ghaf-host-disko-images-themisto.signature -out signature.bin
+  </pre>
+
+  <p>This decodes the signature file "h63fl926x4nl9q1j3lv0gqim7j8yq32j-x038z51wl2cpb06g7v5wg52r85w1v0aq-ghaf-host-disko-images-themisto.signature" to a binary format and saves it as "signature.bin".</p>
+
+  <h3>5. Verify the Signature</h3>
+
+  <pre class="command">
+    openssl dgst -sha256 -verify themisto.pub -signature signature.bin digest.bin
+  </pre
