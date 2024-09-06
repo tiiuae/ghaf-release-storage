@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signature Verification Instructions</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <a href="index.html" class="btn btn-primary mt-4 mb-4">Back to 23.12</a>
+
+        <h1 class="mt-4 mb-4">
+Instructions for Signature Verification of the Provenance File
+</h1>
+
+        <p>In this example we verify the signature of the SLSA provenance file of a Ghaf Lenovo X1 Carbon package which was built and signed by themisto server. </p>
+
+        <h2 class="mt-4 mb-4">Step-by-Step Instructions:</h2>
+
+        <ol>
+             <li>
+                <p>Download and extract the package in an empty directory</p>
+            </li>
+          
+             <li>
+                <p>mkdir verify
+cd verify
+wget https://vedenemo.dev/files/releases/ghaf_24.03/ghaf-24.03_Lenovo_X1_Carbon_Gen11.tar.xz
+tar -xf *.tar.xz
+cd ghaf-24.03_Lenovo_X1_Carbon_Gen11
+cd Build_Report
+cd Provenance_File					  
+ls</p>
+            </li>
+          
+             <li>
+                <p> Download sha256tree.py script (required for calculating hashes for directory trees) </p>
+            </li>
+          
+             <li>
+                <p>
+
+wget https://raw.githubusercontent.com/tiiuae/ci-public/main/sha256tree/sha256tree.py
+
+</p></p>
+            </li>
+          <li>
+                <p> Create the hash of the output directory and convert to binary format </p></p>
+            </li>
+            <li>
+  <p>python3 sha256tree.py --plain dkpv6xdyyhdl337kxr0n89m88bzq87b6-themisto-323-provenance.json > digest.hex
+xxd -r -p digest.hex digest.bin</p>
+  <h2>Decode the signature to binary format</h2>
+
+  <h3>
+
+openssl enc -base64 -d -in w536jabsakwjn98j1v1n58s9y335zy0j-dkpv6xdyyhdl337kxr0n89m88bzq87b6-themisto-323-provenance.json-themisto.signature -out signature.bin
+
+</h3>
+
+
+                <h2> Download the public key for themisto </h2>
+
+  <h3>
+
+
+
+wget https://vedenemo.dev/files/keys/themisto.pub
+
+
+</h3>
+
+                          <h2>  Verify the signature  </h2>
+
+  <h3>
+
+
+
+
+
+openssl dgst -sha256 -verify themisto.pub -signature signature.bin digest.bin
+
+
+
+
+</h3>
+
+  <pre>
+    mkdir verify
+    cd verify
+    wget https://vedenemo.dev/files/releases/ghaf_24.03/ghaf-24.03_Lenovo_X1_Carbon_Gen11.tar.xz
+    tar -xf *.tar.xz
+    cd ghaf-24.03_Lenovo_X1_Carbon_Gen11
+    cd Image
+    tar xf *.tar.xz
+    ls
+  </pre>
+            </li>
+            <li>
+             <p>This creates a directory named "verify" and downloads the Ghaf package. It then extracts the package contents.</p>
+
+  <h3>2. Download sha256tree.py script</h3>
+  <p>Download the `sha256tree.py` script. This script calculates the hash of the image directory.</p>
+  <a href="https://raw.githubusercontent.com/tiiuae/ci-public/main/sha256tree/sha256tree.py">Download sha256tree.py</a> (You can save this script locally and use it in the next step)
+
+  <h3>3. Create the Hash of the Output Directory</h3>
+
+  <pre class="command">
+    python3 sha256tree.py --plain x038z51wl2cpb06g7v5wg52r85w1v0aq-ghaf-host-disko-images > digest.hex
+    xxd -r -p digest.hex digest.bin
+  </pre>
+
+  <p>This script calculates the hash of the "x038z51wl2cpb06g7v5wg52r85w1v0aq-ghaf-host-disko-images" directory and saves it as "digest.hex" and "digest.bin".</p>
+
+  <h3>4. Decode the Signature</h3>
+
+  <pre class="command">
+    openssl enc -base64 -d -in h63fl926x4nl9q1j3lv0gqim7j8yq32j-x038z51wl2cpb06g7v5wg52r85w1v0aq-ghaf-host-disko-images-themisto.signature -out signature.bin
+  </pre>
+
+  <p>This decodes the signature file "h63fl926x4nl9q1j3lv0gqim7j8yq32j-x038z51wl2cpb06g7v5wg52r85w1v0aq-ghaf-host-disko-images-themisto.signature" to a binary format and saves it as "signature.bin".</p>
+
+  <h3>5. Verify the Signature</h3>
+
+  <pre class="command">
+    openssl dgst -sha256 -verify themisto.pub -signature signature.bin digest.bin
+  </pre>
+            </li>
+        </ol>
+
+        <h2 class="mt-4 mb-4">Example run with output</h2>
+
+        <pre>
+ktu@X1-nixos:~]$ mkdir verify
+
+[ktu@X1-nixos:~]$ cd verify
+
+[ktu@X1-nixos:~/verify]$ wget https://vedenemo.dev/files/releases/ghaf_24.03/ghaf-24.03_Lenovo_X1_Carbon_Gen11.tar.xz
+--2024-03-27 09:53:45--  https://vedenemo.dev/files/releases/ghaf_24.03/ghaf-24.03_Lenovo_X1_Carbon_Gen11.tar.xz
+Resolving vedenemo.dev (vedenemo.dev)... 95.175.105.23
+Connecting to vedenemo.dev (vedenemo.dev)|95.175.105.23|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2102399696 (2,0G) [application/octet-stream]
+Saving to: ‘ghaf-24.03_Lenovo_X1_Carbon_Gen11.tar.xz’
+
+ghaf-24.03_Lenovo_X1_Carb 100%[===================================>]   1,96G  23,2MB/s    in 88s     
+
+2024-03-27 09:55:13 (22,8 MB/s) - ‘ghaf-24.03_Lenovo_X1_Carbon_Gen11.tar.xz’ saved [2102399696/2102399696]
+
+
+[ktu@X1-nixos:~/verify]$ tar -xf *.tar.xz
+
+[ktu@X1-nixos:~/verify]$ cd ghaf-24.03_Lenovo_X1_Carbon_Gen11
+
+[ktu@X1-nixos:~/verify/ghaf-24.03_Lenovo_X1_Carbon_Gen11]$ cd Build_Report
+
+[ktu@X1-nixos:~/verify/ghaf-24.03_Lenovo_X1_Carbon_Gen11/Build_Report]$ cd Provenance_File
+
+[ktu@X1-nixos:~/verify/ghaf-24.03_Lenovo_X1_Carbon_Gen11/Build_Report/Provenance_File]$ ls
+dkpv6xdyyhdl337kxr0n89m88bzq87b6-themisto-323-provenance.json
+w536jabsakwjn98j1v1n58s9y335zy0j-dkpv6xdyyhdl337kxr0n89m88bzq87b6-themisto-323-provenance.json-themisto.signature
+
+[ktu@X1-nixos:~/verify/ghaf-24.03_Lenovo_X1_Carbon_Gen11/Build_Report/Provenance_File]$ wget https://raw.githubusercontent.com/tiiuae/ci-public/main/sha256tree/sha256tree.py
+--2024-03-27 09:58:18--  https://raw.githubusercontent.com/tiiuae/ci-public/main/sha256tree/sha256tree.py
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.111.133, 185.199.108.133, 185.199.109.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.111.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 4479 (4,4K) [text/plain]
+Saving to: ‘sha256tree.py’
+
+sha256tree.py             100%[===================================>]   4,37K  --.-KB/s    in 0s      
+
+2024-03-27 09:58:23 (27,0 MB/s) - ‘sha256tree.py’ saved [4479/4479]
+
+
+[ktu@X1-nixos:~/verify/ghaf-24.03_Lenovo_X1_Carbon_Gen11/Build_Report/Provenance_File]$ python3 sha256tree.py --plain dkpv6xdyyhdl337kxr0n89m88bzq87b6-themisto-323-provenance.json > digest.hex
+
+[ktu@X1-nixos:~/verify/ghaf-24.03_Lenovo_X1_Carbon_Gen11/Build_Report/Provenance_File]$ xxd -r -p digest.hex digest.bin
+
+[ktu@X1-nixos:~/verify/ghaf-24.03_Lenovo_X1_Carbon_Gen11/Build_Report/Provenance_File]$ openssl enc -base64 -d -in w536jabsakwjn98j1v1n58s9y335zy0j-dkpv6xdyyhdl337kxr0n89m88bzq87b6-themisto-323-provenance.json-themisto.signature -out signature.bin
+
+[ktu@X1-nixos:~/verify/ghaf-24.03_Lenovo_X1_Carbon_Gen11/Build_Report/Provenance_File]$ wget https://vedenemo.dev/files/keys/themisto.pub
+--2024-03-27 10:03:59--  https://vedenemo.dev/files/keys/themisto.pub
+Resolving vedenemo.dev (vedenemo.dev)... 95.175.105.23
+Connecting to vedenemo.dev (vedenemo.dev)|95.175.105.23|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 178 [application/octet-stream]
+Saving to: ‘themisto.pub’
+
+themisto.pub              100%[===================================>]     178  --.-KB/s    in 0s      
+
+2024-03-27 10:03:59 (54,5 MB/s) - ‘themisto.pub’ saved [178/178]
+
+
+[ktu@X1-nixos:~/verify/ghaf-24.03_Lenovo_X1_Carbon_Gen11/Build_Report/Provenance_File]$ openssl dgst -sha256 -verify themisto.pub -signature signature.bin digest.bin
+Verified OK
+
+        </pre>
+    </div>
+</body>
+
+</html>
