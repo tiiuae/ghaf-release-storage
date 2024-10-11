@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to Vedenemo</title>
-    <style>
+    <title>Ghaf downloads</title>
+ <style>
+     
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -10,44 +11,47 @@
             background: #f2f2f2;
         }
       .header {
-            text-align: center;
-            padding: 50px;
-            background: linear-gradient(to right, #007bff, #36d1dc); /* Gradient background */
-            color: white;
-            border-bottom: 1px solid #dee2e6;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Subtle shadow */
+         text-align: center;
+padding: 50px;
+background: linear-gradient(to right, #008000, #5ac379, #90EE90);
+color: white;
+border-bottom: 1px solid #dee2e6;
+box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); 
         }
       .menu {
             list-style-type: none;
             padding: 20px 0;
             text-align: center;
-            background: linear-gradient(to right, #36d1dc, #5b86e5); /* Gradient background */
+           background: linear-gradient(to right, #008000, #5ac379, #90EE90);
+
         }
         .menu li {
             display: inline-block;
             margin: 0 10px;
         }
         .menu a {
-            color: #fff; /* White text color */
-            font-size: 18px; /* Larger font size */
+            color: #fff;
+            font-size: 18px; 
             text-decoration: none;
             padding: 10px 20px;
-            font-family: 'Google Sans',Arial,sans-serif; /* Google's menu font family */
+            font-family: 'Google Sans',Arial,sans-serif; 
             transition: color 0.3s ease;
         }
         .menu a:hover {
-            color: #f2f2f2; /* Lighter white text hover color */
+             color: #f2f2f2; 
+    background: #008000; 
         }
-        .content {
-            padding: 50px;
-            background: #fff;
-            margin: 20px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-        }
+         .content {
+      margin-top:30px
+      padding-right: 200px;
+      padding-bottom: 50px;
+      padding-left: 20px;
+      margin: 20px;
+    }
         .report {
            border: 1px solid #ddd;
-           margin-bottom: 2px; /* reduced from 5px */
-           padding: 2px; /* reduced from 5px */
+           margin-bottom: 2px; 
+           padding: 2px; 
            border-radius: 5px;
            transition: box-shadow 0.3s ease;
 
@@ -64,65 +68,81 @@
             color: #888;
             margin-bottom: 10px;
         }
-    </style>
+     
+    #left-menu {
+         list-style-type: none;
+        padding: 20px 0;
+        text-align: left; 
+            padding: 20px 0;
+    }
+
+    #left-menu li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    #left-menu a {
+     color: #fff; 
+    font-size: 18px;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-family: 'Google Sans',Arial,sans-serif; 
+    transition: color 0.3s ease;
+
+    display: block;
+    margin-bottom: 10px; 
+    }
+
+    #left-menu a:hover {
+        color: #f2f2f2; 
+    background: #008000; 
+    }
+        .left-menu-container {
+        background: linear-gradient(to right, #008000, #5ac379, #90EE90);
+              width: 200px;
+    }
+ </style>
 </head>
 <body>
 
 <div class="header">
-    <h1>Welcome to Vedenemo</h1>
-    <p>Here you can find the latest deployment release reports</p>
+    <h1>Ghaf downloads</h1>
 </div>
 
 <ul class="menu">
     <li><a href="ghaf-23/">ghaf-23.09</a></li>
     <li><a href="ghaf-23-12/">ghaf-23.12</a></li>
     <li><a href="ghaf-24-03/">ghaf-24.03</a></li>
-    <li><a href="ghaf_24.06/">ghaf-24.06</a></li>
+    <li><a href="ghaf-24-06/">ghaf-24.06</a></li>
+   <li><a id="ghaf-all" href="ghaf-24-09/">ghaf-24.09</a></li>
 </ul>
-
 <div class="content">
-    <h2>Latest Release ghaf-24.06 </h2>
-   <div class="report">
-    <h3 class="report-title"><a href="Ghaf-24.06_Release_Note.html">Ghaf-24.06_Release_Note.html</a></h3>
-    <p class="report-date">28-Jun-2024 05:22</p>
+<div class="left-menu-container">
+    <ul id="left-menu" style="display: none;">
+        <!-- <li><a href="ghaf-24.09.5/">ghaf-24.09.5</a></li>
+        <li><a href="ghaf-.09.4/">ghaf-24.09.4</a></li>
+        <li><a href="ghaf-24.09.3/">ghaf-24.09.3</a></li>
+        <li><a href="ghaf-24-09.2/">ghaf-24.09.2</a></li> -->
+        <li><a href="ghaf-24-09.01/">ghaf-24.09.1</a></li>
+    </ul>
 </div>
-<div class="report">
-    <h3 class="report-title"><a href="ghaf-24.06_Generic_x86.tar.xz">ghaf-24.06_Generic_x86.tar.xz</a></h3>
-    <p class="report-date">01-Jul-2024 17:43</p>
-</div>
-<div class="report">
-    <h3 class="report-title"><a href="ghaf-24.06_Lenovo_X1_Carbon_Gen11.tar.xz">ghaf-24.06_Lenovo_X1_Carbon_Gen11.tar.xz</a></h3>
-    <p class="report-date">28-Jun-2024 11:08</p>
-</div>
-<div class="report">
-    <h3 class="report-title"><a href="ghaf-24.06_Nvidia_Orin_AGX_cross-compiled.tar.xz">ghaf-24.06_Nvidia_Orin_AGX_cross-compiled.tar.xz</a></h3>
-    <p class="report-date">28-Jun-2024 13:03</p>
-</div>
-<div class="report">
-    <h3 class="report-title"><a href="ghaf-24.06_Nvidia_Orin_AGX_native-build.tar.xz">ghaf-24.06_Nvidia_Orin_AGX_native-build.tar.xz</a></h3>
-    <p class="report-date">28-Jun-2024 07:28</p>
-</div>
-<div class="report">
-    <h3 class="report-title"><a href="ghaf-24.06_Nvidia_Orin_NX_cross-compiled.tar.xz">ghaf-24.06_Nvidia_Orin_NX_cross-compiled.tar.xz</a></h3>
-    <p class="report-date">28-Jun-2024 13:43</p>
-</div>
-<div class="report">
-    <h3 class="report-title"><a href="ghaf-24.06_Nvidia_Orin_NX_native-build.tar.xz">ghaf-24.06_Nvidia_Orin_NX_native-build.tar.xz</a></h3>
-    <p class="report-date">28-Jun-2024 14:19</p>
-</div>
-<div class="report">
-    <h3 class="report-title"><a href="ghaf-24.06_PolarFire_RISC-V.tar.xz">ghaf-24.06_PolarFire_RISC-V.tar.xz</a></h3>
-    <p class="report-date">28-Jun-2024 14:47</p>
-</div>
-<div class="report">
-    <h3 class="report-title"><a href="signature-verification-of-binary-image.html">signature-verification-of-binary-image.html</a></h3>
-    <p class="report-date">28-Jun-2024 05:22</p>
-</div>
-<div class="report">
-    <h3 class="report-title"><a href="signature-verification-of-provenance-file.html">signature-verification-of-provenance-file.html</a></h3>
-    <p class="report-date">28-Jun-2024 05:22</p>
-</div>
-</div>
-
+ </div>
 </body>
 </html>
+
+<script>
+    var isLeftMenuVisible = false; 
+
+    document.getElementById('ghaf-all').addEventListener('click', function(event) {
+        event.preventDefault();
+        var leftMenu = document.getElementById('left-menu');
+
+        if (isLeftMenuVisible) {
+            leftMenu.style.display = 'none';
+            isLeftMenuVisible = false; 
+        } else {
+            leftMenu.style.display = 'block'; 
+            isLeftMenuVisible = true; 
+        }
+    });
+</script>
