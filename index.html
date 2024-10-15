@@ -3,8 +3,8 @@
 <head>
     <title>Ghaf downloads</title>
  <style>
-     
-        body {
+ 
+     body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -19,6 +19,7 @@ border-bottom: 1px solid #dee2e6;
 box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); 
         }
       .menu {
+            margin-top: 2px;
             list-style-type: none;
             padding: 20px 0;
             text-align: center;
@@ -69,14 +70,19 @@ box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
             margin-bottom: 10px;
         }
      
-    #left-menu {
+      #left-menu {
+       
          list-style-type: none;
         padding: 20px 0;
         text-align: left; 
             padding: 20px 0;
+        background: linear-gradient(to right, #008000, #5ac379, #90EE90);
+        margin-top:-16px
     }
 
+
     #left-menu li {
+       cursor: pointer;
         display: block;
         margin: 10px 0;
     }
@@ -93,17 +99,58 @@ box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
     margin-bottom: 10px; 
     }
 
-    #left-menu a:hover {
-        color: #f2f2f2; 
-    background: #008000; 
-    }
+   #left-menu a.selected {
+    
+    background: #008000;
+    color: #f2f2f2;
+}
         .left-menu-container {
-        background: linear-gradient(to right, #008000, #5ac379, #90EE90);
               width: 200px;
+            margin-left: -77px;
     }
+    
+      .menu a.selected {
+        color: #f2f2f2; 
+        background: #008000; 
+    }
+
+    .report {
+           border: 1px solid #ddd;
+           margin-bottom: 2px; /* reduced from 5px */
+           padding: 2px; /* reduced from 5px */
+           border-radius: 5px;
+           transition: box-shadow 0.3s ease;
+
+        }
+        .report:hover {
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        .report-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .report-date {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .flex-container {
+    display: flex;
+}
+
+.right-container {
+    flex-grow: 1;
+    display: none; 
+  margin-left: 4px;
+  margin-top: -14px;
+}
+
+
  </style>
 </head>
 <body>
+
 
 <div class="header">
     <h1>Ghaf downloads</h1>
@@ -114,35 +161,163 @@ box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
     <li><a href="ghaf-23-12/">ghaf-23.12</a></li>
     <li><a href="ghaf-24-03/">ghaf-24.03</a></li>
     <li><a href="ghaf-24-06/">ghaf-24.06</a></li>
-   <li><a id="ghaf-all" href="ghaf-24-09/">ghaf-24.09</a></li>
+   <li><a id="ghaf-24.09.0" href="ghaf-24-09/">ghaf-24.09</a></li>
 </ul>
 <div class="content">
-<div class="left-menu-container">
-    <ul id="left-menu" style="display: none;">
-        <!-- <li><a href="ghaf-24.09.5/">ghaf-24.09.5</a></li>
-        <li><a href="ghaf-.09.4/">ghaf-24.09.4</a></li>
-        <li><a href="ghaf-24.09.3/">ghaf-24.09.3</a></li>
-        <li><a href="ghaf-24-09.2/">ghaf-24.09.2</a></li> -->
-        <li><a href="ghaf-24-09.01/">ghaf-24.09.1</a></li>
-    </ul>
-</div>
+    <div class="content">
+        <div class="flex-container">
+            <div class="left-menu-container">
+                <ul id="left-menu" style="display: none;">
+                    <li><a id="ghaf-24.09">ghaf-24.09</a></li>
+                </ul>
+            </div>
+            <div class="right-container">
+                 
+    <div class="report">
+        <h3 class="report-title"><a href="/ghaf-24-09-1/files/packages.aarch64-linux.nvidia-jetson-orin-agx-debug.tar">packages.aarch64-linux.nvidia-jetson-orin-agx-debug.tar</a></h3>
+        <p class="report-date">10-Oct-2024</p>
+    </div>
+    
+    <div class="report">
+        <h3 class="report-title"><a href="/ghaf-24-09-1/files/packages.aarch64-linux.nvidia-jetson-orin-nx-debug.tar">packages.aarch64-linux.nvidia-jetson-orin-nx-debug.tar</a></h3>
+        <p class="report-date">10-Oct-2024</p>
+    </div>
+    
+    <div class="report">
+        <h3 class="report-title"><a href="/ghaf-24-09-1/files/packages.x86_64-linux.doc.tar">packages.x86_64-linux.doc.tar</a></h3>
+        <p class="report-date">10-Oct-2024</p>
+    </div>
+    
+    <div class="report">
+        <h3 class="report-title"><a href="/ghaf-24-09-1/files/packages.x86_64-linux.generic-x86_64-debug.tar">packages.x86_64-linux.generic-x86_64-debug.tar</a></h3>
+        <p class="report-date">10-Oct-2024</p>
+    </div>
+    
+    <div class="report">
+        <h3 class="report-title"><a href="/ghaf-24-09-1/files/packages.x86_64-linux.lenovo-x1-carbon-gen11-debug-installer.tar">packages.x86_64-linux.lenovo-x1-carbon-gen11-debug-installer.tar</a></h3>
+        <p class="report-date">10-Oct-2024</p>
+    </div>
+    
+    <div class="report">
+        <h3 class="report-title"><a href="/ghaf-24-09-1/files/packages.x86_64-linux.lenovo-x1-carbon-gen11-debug.tar">packages.x86_64-linux.lenovo-x1-carbon-gen11-debug.tar</a></h3>
+        <p class="report-date">10-Oct-2024</p>
+    </div>
+    
+    <div class="report">
+        <h3 class="report-title"><a href="/ghaf-24-09-1/files/packages.x86_64-linux.microchip-icicle-kit-debug-from-x86_64.tar">packages.x86_64-linux.microchip-icicle-kit-debug-from-x86_64.tar</a></h3>
+        <p class="report-date">10-Oct-2024</p>
+    </div>
+    
+    <div class="report">
+        <h3 class="report-title"><a href="/ghaf-24-09-1/files/packages.x86_64-linux.nvidia-jetson-orin-agx-debug-from-x86_64.tar">packages.x86_64-linux.nvidia-jetson-orin-agx-debug-from-x86_64.tar</a></h3>
+        <p class="report-date">10-Oct-2024</p>
+    </div>
+    
+    <div class="report">
+        <h3 class="report-title"><a href="/ghaf-24-09-1/files/packages.x86_64-linux.nvidia-jetson-orin-nx-debug-from-x86_64.tar">packages.x86_64-linux.nvidia-jetson-orin-nx-debug-from-x86_64.tar</a></h3>
+        <p class="report-date">10-Oct-2024</p>
+    </div>
+            </div>
+        </div>
+    </div>
  </div>
 </body>
 </html>
 
 <script>
-    var isLeftMenuVisible = false; 
+var isLeftMenuVisible = false; 
+var isRightContainerVisible = false;
 
-    document.getElementById('ghaf-all').addEventListener('click', function(event) {
-        event.preventDefault();
-        var leftMenu = document.getElementById('left-menu');
+// Check the URL parameters when the page loads
 
-        if (isLeftMenuVisible) {
-            leftMenu.style.display = 'none';
-            isLeftMenuVisible = false; 
-        } else {
-            leftMenu.style.display = 'block'; 
-            isLeftMenuVisible = true; 
+window.addEventListener('load', function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var selected = urlParams.get('selected');
+
+    if (selected) {
+        var selectedItem = document.getElementById(selected);
+        var allItem = document.getElementById('ghaf-24.09.0');
+        if (selectedItem && allItem) {
+            selectedItem.click(); // Simulate a click event on the selected item
+            allItem.click(); // Simulate a click event on the 'ghaf-24.09.0' item
+
+            // Show the left menu and select the menu item
+            var leftMenu = document.getElementById('left-menu');
+            leftMenu.style.display = 'block';
+            isLeftMenuVisible = true;
+
+            // Show the right container
+            var rightContainer = document.querySelector('.right-container');
+            rightContainer.style.display = 'block';
+            isRightContainerVisible = true;
+
+            // Select the menu items
+            var menuLinks = document.querySelectorAll('.menu a');
+            for (var i = 0; i < menuLinks.length; i++) {
+                menuLinks[i].classList.remove('selected');
+                if (menuLinks[i].id === selected || menuLinks[i].id === 'ghaf-24.09.0') {
+                    menuLinks[i].classList.add('selected');
+                }
+            }
         }
+    }
+});
+
+document.getElementById('ghaf-24.09.0').addEventListener('click', function(event) {
+    event.preventDefault();
+    var leftMenu = document.getElementById('left-menu');
+    var rightContainer = document.querySelector('.right-container');
+
+    if (isLeftMenuVisible) {
+        leftMenu.style.display = 'none';
+        isLeftMenuVisible = false; 
+    } else {
+        leftMenu.style.display = 'block'; 
+        isLeftMenuVisible = true; 
+    }
+
+    // Hide the right-container when the left menu is toggled
+    rightContainer.style.display = 'none';
+});
+
+document.getElementById('ghaf-24.09').addEventListener('click', function(event) {
+    event.preventDefault();
+    var rightContainer = document.querySelector('.right-container');
+
+    // Toggle the visibility of the right container
+    if (isRightContainerVisible) {
+        rightContainer.style.display = 'none';
+        isRightContainerVisible = false;
+        this.classList.remove('selected');
+        history.pushState({}, '', window.location.pathname); // Remove the URL parameter
+    } else {
+        rightContainer.style.display = 'block';
+        isRightContainerVisible = true;
+        this.classList.add('selected');
+        history.pushState({}, '', window.location.pathname + '?selected=' + this.id); // Add the URL parameter
+    }
+});
+
+document.getElementById('ghaf-24.09').addEventListener('dblclick', function(event) {
+    event.preventDefault();
+    var rightContainer = document.querySelector('.right-container');
+
+    // Toggle the visibility of the right container
+    if (rightContainer.style.display === 'none') {
+        rightContainer.style.display = 'block';
+    } else {
+        rightContainer.style.display = 'none';
+    }
+});
+
+var menuLinks = document.querySelectorAll('.menu a');
+for (var i = 0; i < menuLinks.length; i++) {
+    menuLinks[i].addEventListener('click', function() {
+        for (var j = 0; j < menuLinks.length; j++) {
+            menuLinks[j].classList.remove('selected');
+        }
+        this.classList.add('selected');
+        history.pushState({}, '', window.location.pathname + '?selected=' + this.id); // Add the URL parameter
     });
-</script>
+}
+ </script>

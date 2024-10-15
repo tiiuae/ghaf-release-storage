@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signature Verification of a Binary Image</title>
+</head>
+<body>
+    <h1>Instructions for Signature Verification of a Binary Image</h1>
+    <p>In this example we verify a signature of a Ghaf package. These steps can be applied to any Ghaf package. Notice that sometimes the binary image and the signature file are in the sd-image directory.</p>
+
+    <h2>Step-by-Step Instructions:</h2>
+    <ul>
+        <li><b>Download and extract the package in an empty directory</b></li>
+        <pre>
+            mkdir verify
+            cd verify
+            wget https://ghafreleasesstorage.z16.web.core.windows.net/ghaf-24-09-1/files/packages.x86_64-linux.lenovo-x1-carbon-gen11-debug.tar
+            tar -xf *.tar
+            cd packages.x86_64-linux.lenovo-x1-carbon-gen11-debug
+            ls
+        </pre>
+
+        <li><b>Verify the signature</b></li>
+        <pre>
+            nix run github:tiiuae/ci-yubi/bdb2dbf#verify -- --path disk1.raw.zst --sigfile disk1.raw.zst.sig
+        </pre>
+    </ul>
+
+    <h2>Example run with output</h2>
+    <pre>
+    [ktu@x1-nixos:~]$ mkdir verify
+
+    [ktu@x1-nixos:~]$ cd verify
+
+    [ktu@x1-nixos:~/verify]$ wget https://ghafreleasesstorage.z16.web.core.windows.net/ghaf-24-09-1/files/packages.x86_64-linux.lenovo-x1-carbon-gen11-debug.tar
+    --2024-10-15 16:10:30-- https://ghafreleasesstorage.z16.web.core.windows.net/ghaf-24-09-1/files/packages.x86_64-linux.lenovo-x1-carbon-gen11-debug.tar
+    Resolving ghafreleasesstorage.z16.web.core.windows.net (ghafreleasesstorage.z16.web.core.windows.net)... 20.60.246.36
+    Connecting to ghafreleasesstorage.z16.web.core.windows.net (ghafreleasesstorage.z16.web.core.windows.net)|20.60.246.36|:443... connected.
+    HTTP request sent, awaiting response... 200 OK
+    Length: 4921190400 (4.6G) [application/x-tar]
+    Saving to: ‘packages.x86_64-linux.lenovo-x1-carbon-gen11-debug.tar’
+
+    packages.x86_64-linux.lenovo-x1-carbon-gen11-debug.tar    100%[================================================================================================>]   4.586  10.3MB/s    in 5m 52s
+
+    2024-10-15 16:16:35 (13.4 MB/s) - ‘packages.x86_64-linux.lenovo-x1-carbon-gen11-debug.tar’ saved [4921190400/4921190400]
+
+    [ktu@x1-nixos:~/verify]$ tar -xf *.tar
+    [ktu@x1-nixos:~/verify]$ cd packages.x86_64-linux.lenovo-x1-carbon-gen11-debug
+    [ktu@x1-nixos:~/verify/packages.x86_64-linux.lenovo-x1-carbon-gen11-debug]$ ls
+    disk1.raw.zst  disk1.raw.zst.sig  index.html  scs  test-results
+
+    [ktu@x1-nixos:~/verify/packages.x86_64-linux.lenovo-x1-carbon-gen11-debug]$ nix run github:tiiuae/ci-yubi/bdb2dbf#verify -- --path disk1.raw.zst --sigfile disk1.raw.zst.sig
+    Signature verification result: {'message': 'Signature Verification Result', 'is_valid': True}
+    </pre>
+</body>
+</html>
