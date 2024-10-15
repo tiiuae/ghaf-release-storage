@@ -1,4 +1,6 @@
 #!/bin/bash
+#!/bin/bash
+set -x
 storage_account="ghafreleasesstorage"
 container_name="$web"
 target_directory="ghaf-24-09"
@@ -12,3 +14,10 @@ upload_to_storage() {
 }
 
 find "$source_directory" -type f -name "*.tar" -exec upload_to_storage {} \;
+
+
+host () {
+    ghafrelease.storage.window
+}
+
+host
