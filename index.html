@@ -107,7 +107,7 @@ box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 }
         .left-menu-container {
  width: 200px;
-  margin-left: -80px;
+  margin-left: -40px;
   margin-top: -33px;
     }
     
@@ -147,6 +147,12 @@ box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
   margin-left: 4px;
   margin-top: -14px;
 }
+   .right-container-1 {
+    flex-grow: 1;
+    display: none; 
+  margin-left: 4px;
+  margin-top: -14px;
+}
 .no-underline{
     text-decoration: none;
     color: white;
@@ -157,29 +163,29 @@ box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 </head>
 <body>
 
-
 <div class="header">
-    <h1><a href="https://ghafreleasesstorage.z16.web.core.windows.net" class="no-underline">Ghaf downloads</a></h1>
-</div>
+        <h1><a href="https://ghafreleasesstorage.z16.web.core.windows.net" class="no-underline">Ghaf downloads</a></h1>
+    </div>
 
-<ul class="menu">
-    <li><a href="ghaf-23/">ghaf-23.09</a></li>
-    <li><a href="ghaf-23-12/">ghaf-23.12</a></li>
-    <li><a href="ghaf-24-03/">ghaf-24.03</a></li>
-    <li><a href="ghaf-24-06/">ghaf-24.06</a></li>
-   <li><a id="ghaf-24.09.0" href="ghaf-24-09/">ghaf-24.09</a></li>
-</ul>
-<div class="content">
+    <ul class="menu">
+        <li><a href="ghaf-23/">ghaf-23.09</a></li>
+        <li><a href="ghaf-23-12/">ghaf-23.12</a></li>
+        <li><a href="ghaf-24-03/">ghaf-24.03</a></li>
+        <li><a href="ghaf-24-06/">ghaf-24.06</a></li>
+        <li><a id="ghaf-24.09.0" href="ghaf-24-09/">ghaf-24.09</a></li>
+    </ul>
+
     <div class="content">
         <div class="flex-container">
             <div class="left-menu-container">
                 <ul id="left-menu" style="display: none;">
                     <li><a id="ghaf-24.09">ghaf-24.09</a></li>
+                    <li><a id="ghaf-24.09.1">ghaf-24.09.1</a></li>
                 </ul>
             </div>
-            <div class="right-container">
-                 
-    <div class="report">
+
+            <div class="right-container" style="display: none;">       
+                 <div class="report">
         <h3 class="report-title"><a href="/ghaf-24-09-1/files/packages.aarch64-linux.nvidia-jetson-orin-agx-debug.tar">packages.aarch64-linux.nvidia-jetson-orin-agx-debug.tar</a></h3>
         <p class="report-date">10-Oct-2024</p>
     </div>
@@ -229,111 +235,114 @@ box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
         <p class="report-date">10-Oct-2024</p>
     </div>
       <div class="report">
-        <h3 class="report-title"><a href="/ghaf-24-09-1/Ghaf-24.09_Release_Note.html">Ghaf-24.09_Release_Note</a></h3>
+        <h3 class="report-title"><a href="/ghaf-24-09-1/Ghaf-24.09_Release_Note.pdf">Ghaf-24.09_Release_Note.pdf</a></h3>
         <p class="report-date">10-Oct-2024</p>
     </div>
             </div>
+
+            <div class="right-container-1" style="display: none;">       
+                <div class="report">
+                    <h3 class="report-title"><a href="/ghaf-24-09-01/files-1/packages.aarch64-linux.nvidia-jetson-orin-agx-debug.tar">packages.aarch64-linux.nvidia-jetson-orin-agx-debug.tar</a></h3>
+                    <p class="report-date">22-Oct-2024</p>
+                </div>
+                 <div class="report">
+                    <h3 class="report-title"><a href="/ghaf-24-09-01/files-1/packages.aarch64-linux.nvidia-jetson-orin-nx-debug.tar">packages.aarch64-linux.nvidia-jetson-orin-nx-debug.tar</a></h3>
+                    <p class="report-date">22-Oct-2024</p>
+                </div>
+                 <div class="report">
+                    <h3 class="report-title"><a href="/ghaf-24-09-01/files-1/packages.x86_64-linux.generic-x86_64-debug.tar">packages.x86_64-linux.generic-x86_64-debug.tar</a></h3>
+                    <p class="report-date">22-Oct-2024</p>
+                </div>
+                 <div class="report">
+                    <h3 class="report-title"><a href="/ghaf-24-09-01/files-1/packages.x86_64-linux.lenovo-x1-carbon-gen11-debug.tar">packages.x86_64-linux.lenovo-x1-carbon-gen11-debug.tar</a></h3>
+                    <p class="report-date">22-Oct-2024</p>
+                </div>
+                 <div class="report">
+                    <h3 class="report-title"><a href="/ghaf-24-09-01/files-1/packages.x86_64-linux.lenovo-x1-carbon-gen11-debug-installer.tar">packages.x86_64-linux.lenovo-x1-carbon-gen11-debug-installer.tar</a></h3>
+                    <p class="report-date">22-Oct-2024</p>
+                </div>
+                 <div class="report">
+                    <h3 class="report-title"><a href="/ghaf-24-09-01/files-1/packages.x86_64-linux.microchip-icicle-kit-debug-from-x86_64.tar">packages.x86_64-linux.microchip-icicle-kit-debug-from-x86_64.tar</a></h3>
+                    <p class="report-date">22-Oct-2024</p>
+                </div>
+                 <div class="report">
+                    <h3 class="report-title"><a href="/ghaf-24-09-01/files-1/packages.x86_64-linux.nvidia-jetson-orin-agx-debug-from-x86_64.tar">packages.x86_64-linux.nvidia-jetson-orin-agx-debug-from-x86_64.tar</a></h3>
+                    <p class="report-date">22-Oct-2024</p>
+                </div>
+              <div class="report">
+                    <h3 class="report-title"><a href="/ghaf-24-09-01/files-1/packages.x86_64-linux.nvidia-jetson-orin-nx-debug-from-x86_64.tar">packages.x86_64-linux.nvidia-jetson-orin-nx-debug-from-x86_64.tar</a></h3>
+                    <p class="report-date">22-Oct-2024</p>
+                </div>
+            </div>
         </div>
     </div>
- </div>
 </body>
 </html>
-
 <script>
-var isLeftMenuVisible = false; 
-var isRightContainerVisible = false;
+let isLeftMenuVisible = false; 
+let isRightContainerVisible = false;
+let isRightContainer1Visible = false;
 
-// Check the URL parameters when the page loads
+const toggleVisibility = (element, isVisible) => {
+    element.style.display = isVisible ? 'block' : 'none';
+};
 
-window.addEventListener('load', function() {
-    var urlParams = new URLSearchParams(window.location.search);
-    var selected = urlParams.get('selected');
+const handleMenuClick = (event, container, isVisibleFlag) => {
+    event.preventDefault();
+    toggleVisibility(container, !isVisibleFlag);
+    isVisibleFlag = !isVisibleFlag;
+    event.target.classList.toggle('selected', isVisibleFlag);
+    history.pushState({}, '', window.location.pathname + (isVisibleFlag ? `?selected=${event.target.id}` : ''));
+    return isVisibleFlag;
+};
+
+window.addEventListener('load', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const selected = urlParams.get('selected');
 
     if (selected) {
-        var selectedItem = document.getElementById(selected);
-        var allItem = document.getElementById('ghaf-24.09.0');
-        if (selectedItem && allItem) {
-            selectedItem.click(); // Simulate a click event on the selected item
-            allItem.click(); // Simulate a click event on the 'ghaf-24.09.0' item
-
-            // Show the left menu and select the menu item
-            var leftMenu = document.getElementById('left-menu');
-            leftMenu.style.display = 'block';
-            isLeftMenuVisible = true;
-
-            // Show the right container
-            var rightContainer = document.querySelector('.right-container');
-            rightContainer.style.display = 'block';
-            isRightContainerVisible = true;
-
-            // Select the menu items
-            var menuLinks = document.querySelectorAll('.menu a');
-            for (var i = 0; i < menuLinks.length; i++) {
-                menuLinks[i].classList.remove('selected');
-                if (menuLinks[i].id === selected || menuLinks[i].id === 'ghaf-24.09.0') {
-                    menuLinks[i].classList.add('selected');
-                }
-            }
+        const selectedItem = document.getElementById(selected);
+        if (selectedItem) {
+            selectedItem.classList.add('selected');
         }
     }
 });
 
-document.getElementById('ghaf-24.09.0').addEventListener('click', function(event) {
+document.getElementById('ghaf-24.09.0').addEventListener('click', event => {
     event.preventDefault();
-    var leftMenu = document.getElementById('left-menu');
-    var rightContainer = document.querySelector('.right-container');
+    const leftMenu = document.getElementById('left-menu');
+    const rightContainer = document.querySelector('.right-container');
+    const rightContainer1 = document.querySelector('.right-container-1');
 
-    if (isLeftMenuVisible) {
-        leftMenu.style.display = 'none';
-        isLeftMenuVisible = false; 
-    } else {
-        leftMenu.style.display = 'block'; 
-        isLeftMenuVisible = true; 
-    }
-
-    // Hide the right-container when the left menu is toggled
-    rightContainer.style.display = 'none';
+    isLeftMenuVisible = !isLeftMenuVisible;
+    toggleVisibility(leftMenu, isLeftMenuVisible);
+    toggleVisibility(rightContainer, false);
+    toggleVisibility(rightContainer1, false);
+    isRightContainerVisible = false;
+    isRightContainer1Visible = false;
+   document.getElementById('ghaf-24.09').classList.remove('selected');
+    document.getElementById('ghaf-24.09.1').classList.remove('selected');
 });
 
-document.getElementById('ghaf-24.09').addEventListener('click', function(event) {
-    event.preventDefault();
-    var rightContainer = document.querySelector('.right-container');
+document.getElementById('ghaf-24.09').addEventListener('click', event => {
+    isRightContainerVisible = handleMenuClick(event, document.querySelector('.right-container'), isRightContainerVisible);
+    toggleVisibility(document.querySelector('.right-container-1'), false);
+    isRightContainer1Visible = false;
+    document.getElementById('ghaf-24.09.1').classList.remove('selected');
+});
 
-    // Toggle the visibility of the right container
-    if (isRightContainerVisible) {
-        rightContainer.style.display = 'none';
-        isRightContainerVisible = false;
-        this.classList.remove('selected');
-        history.pushState({}, '', window.location.pathname); // Remove the URL parameter
-    } else {
-        rightContainer.style.display = 'block';
-        isRightContainerVisible = true;
+document.getElementById('ghaf-24.09.1').addEventListener('click', event => {
+    isRightContainer1Visible = handleMenuClick(event, document.querySelector('.right-container-1'), isRightContainer1Visible);
+    toggleVisibility(document.querySelector('.right-container'), false);
+    isRightContainerVisible = false;
+    document.getElementById('ghaf-24.09').classList.remove('selected');
+});
+
+document.querySelectorAll('.menu a').forEach(link => {
+    link.addEventListener('click', function() {
+        document.querySelectorAll('.menu a').forEach(link => link.classList.remove('selected'));
         this.classList.add('selected');
-        history.pushState({}, '', window.location.pathname + '?selected=' + this.id); // Add the URL parameter
-    }
-});
-
-document.getElementById('ghaf-24.09').addEventListener('dblclick', function(event) {
-    event.preventDefault();
-    var rightContainer = document.querySelector('.right-container');
-
-    // Toggle the visibility of the right container
-    if (rightContainer.style.display === 'none') {
-        rightContainer.style.display = 'block';
-    } else {
-        rightContainer.style.display = 'none';
-    }
-});
-
-var menuLinks = document.querySelectorAll('.menu a');
-for (var i = 0; i < menuLinks.length; i++) {
-    menuLinks[i].addEventListener('click', function() {
-        for (var j = 0; j < menuLinks.length; j++) {
-            menuLinks[j].classList.remove('selected');
-        }
-        this.classList.add('selected');
-        history.pushState({}, '', window.location.pathname + '?selected=' + this.id); // Add the URL parameter
+        history.pushState({}, '', window.location.pathname + `?selected=${this.id}`);
     });
-}
-
- </script>
+});
+</script>
