@@ -15,11 +15,7 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Create storage container if it does not exist
-      run: |
-        az storage container create --name ghaf-releases-container --account-name your_actual_storage_account_name --auth-mode login
-
+        
     - name: Upload files to Azure Storage
       run: |
         az storage blob upload-batch -d 'ghaf-releases-container' -s . --account-name ghafreleasesstorage --overwrite --auth-mode login
