@@ -18,4 +18,4 @@ jobs:
 
     - name: Upload files to Azure Storage
       run: |
-        az storage blob upload-batch -d 'ghafreleasesstorage' -s . --account-name ghafreleasesstorage --overwrite
+        az storage blob upload-batch -d 'ghaf-releases-container' -s . --account-name ghaf-releases-container --overwrite
