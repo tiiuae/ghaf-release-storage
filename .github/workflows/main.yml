@@ -1,0 +1,21 @@
+name: Upload to Azure Storage
+
+on:
+  workflow_dispatch:
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Azure CLI
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Upload files to Azure Storage
+      run: |
+        az storage blob upload-batch -d 'ghafreleasesstorage' -s . --account-name ghafreleasesstorage --overwrite
