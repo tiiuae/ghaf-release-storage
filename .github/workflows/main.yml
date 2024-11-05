@@ -18,7 +18,7 @@ jobs:
 
     - name: Create storage container if it does not exist
       run: |
-        az storage container create --name ghaf-releases-container --account-name ghafreleasesstorage --account-key ${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }}
+        az storage container create --name ghaf-releases-container --account-name ghafreleasesstorage --account-key ${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }} || true
 
     - name: Upload files to Azure Storage
       run: |
