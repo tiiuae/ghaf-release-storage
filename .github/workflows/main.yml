@@ -15,7 +15,7 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
+
     - name: Upload files to Azure Storage
       run: |
-        az storage blob upload-batch -d 'ghaf-releases-container' -s . --account-name ghafreleasesstorage --overwrite --auth-mode login
+        az storage blob upload-batch -d 'ghaf-releases-container' -s . --account-name ghafreleasesstorage --overwrite --auth-mode key --account-key ${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }}
