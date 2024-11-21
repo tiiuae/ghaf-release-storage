@@ -1,0 +1,25 @@
+name: Upload to Azure Storage
+
+on:
+  workflow_dispatch:
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Azure CLI
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Create storage container if it does not exist
+      run: |
+        az storage container create --name ghaf-releases-container --account-name ghafreleasesstorage --account-key ${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }} || true
+
+    - name: Upload files to Azure Storage
+      run: |
+        az storage blob upload-batch -d ghaf-releases-container -s . --account-name ghafreleasesstorage --auth-mode key --overwrite --account-key ${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }}

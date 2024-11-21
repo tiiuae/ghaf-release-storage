@@ -1,0 +1,4 @@
+*.js linguist-language=JavaScript
+*.sh linguist-language=Shell
+*.css linguist-language=css
+*.html linguist-vendored

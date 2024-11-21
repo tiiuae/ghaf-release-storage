@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghaf Framework Release Notes</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        p {
+            line-height: 1.6;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .status {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: #fff;
+        }
+        .status.in-progress {
+            background-color: #f39c12;
+        }
+        .status.on-hold {
+            background-color: #e74c3c;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header, .content, .footer {
+            padding: 20px;
+            background-color: #fff;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+    <h1>Introduction</h1>
+    <p>Ghaf Framework is an open-source project for enhancing security through compartmentalization on edge devices.</p>
+
+    <h2>Release Tag</h2>
+    <p><a href="https://github.com/tiiuae/ghaf/releases/tag/ghaf-24.09">https://github.com/tiiuae/ghaf/releases/tag/ghaf-24.09</a></p>
+
+    <h2>Supported Hardware</h2>
+    <ul>
+        <li>NVIDIA Jetson AGX Orin</li>
+        <li>NVIDIA Jetson Orin NX</li>
+        <li>Generic x86 (PC)</li>
+        <li>Polarfire Icicle Kit</li>
+        <li>Lenovo ThinkPad X1 Carbon Gen 11</li>
+        <li>Lenovo ThinkPad X1 Carbon Gen 10</li>
+        <li>NXP i.MX 8M Plus</li>
+    </ul>
+
+    <h2>What is new in Ghaf-24.09</h2>
+    <h3>Lenovo X1 Carbon Gen 10/11:</h3>
+    <ul>
+        <li>Trusted Business VM with firewall protection containing the following apps: Microsoft365, Outlook, Teams, Trusted Browser, Text Editor, Video Editor</li>
+        <li>Integrated camera supported with Business VM applications</li>
+        <li>Previous Element-VM modified to more generic Comms-VM adding Slack</li>
+        <li>GlobalProtect VPN client</li>
+        <li>Centralized logging solution using Grafana</li>
+        <li>ZFS file system and logical volume manager</li>
+        <li>Storage VM using impermanence framework</li>
+        <li>USB hot plug supporting input, audio and media devices</li>
+        <li>USB camera support on Chromium VM</li>
+        <li>Initial version of file manager</li>
+        <li>Hardware detection scanner to generate hardware definition files for different laptops</li>
+        <li>GPU acceleration enabled</li>
+        <li>Yubikey authentication</li>
+        <li>Falcon LLM</li>
+        <li>Greetd login manager with system autolock enabled, locks screen after 5 minutes of inactivity</li>
+        <li>UI waybar replaced by EWW taskbar</li>
+        <li>Magnification app</li>
+        <li>Calculator</li>
+        <li>Sticky notes app</li>
+        <li>Screenshot app</li>
+        <li>AppFlowy has been disabled</li>
+    </ul>
+
+    <h3>NVIDIA Jetson Orin NX:</h3>
+    <ul>
+        <li>Jetpack baseline software updates and fixes.</li>
+        <li>Further refactoring and modularization of the Ghaf framework.</li>
+        <li>Development, testing, and performance tooling improvements.</li>
+    </ul>
+
+    <h2>Bug Fixes</h2>
+    <p>Fixed bugs that were present in the ghaf-24.06 release:</p>
+    <ul>
+        <li>N/A</li>
+    </ul>
+    <h1>Known Issues and Limitations</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Issue</th>
+                <th>Status</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Orin NX/AGX: Cannot log in to the Element chat with a Google account</td>
+                <td class="status in-progress">IN PROGRESS</td>
+                <td>Under investigation</td>
+            </tr>
+            <tr>
+                <td>Orin AGX and NX: screenshots cannot be taken successfully anymore</td>
+                <td class="status in-progress">IN PROGRESS</td>
+                <td>Under investigation</td>
+            </tr>
+            <tr>
+                <td>Orin AGX and NX and NUC: no taskbar visible</td>
+                <td class="status in-progress">IN PROGRESS</td>
+                <td>Use Win-key to open up the menu</td>
+            </tr>
+            <tr>
+                <td>Cannot connect to a hidden Wi-Fi network from GUI</td>
+                <td class="status in-progress">IN PROGRESS</td>
+                <td>Workaround: connect with SSH to a netvm and run the command: nmcli dev wifi connect SSID password PASSWORD hidden yes.</td>
+            </tr>
+            <tr>
+                <td>Orin AGX and NX: cannot make voice calls using the Element application</td>
+                <td class="status in-progress">IN PROGRESS</td>
+                <td>Under investigation</td>
+            </tr>
+            <tr>
+                <td>The Element application cannot find a camera</td>
+                <td class="status in-progress">IN PROGRESS</td>
+                <td>Under investigation</td>
+            </tr>
+            <tr>
+                <td>Lenovo X1: Cannot log in to the Element chat with a Google account</td>
+                <td class="status in-progress">IN PROGRESS</td>
+                <td>Workaround: create a user specifically for Element.</td>
+            </tr>
+            <tr>
+                <td>Time synchronization between host and VMs does not work in all scenarios</td>
+                <td class="status in-progress">IN PROGRESS</td>
+                <td>Under investigation</td>
+            </tr>
+            <tr>
+                <td>Not possible to change WiFi network from the Network Settings app</td>
+                <td class="status in-progress">IN PROGRESS</td>
+                <td>Fix under verification. Workaround: Remove current network from the app</td>
+            </tr>
+            <tr>
+                <td>Taskbar on extended display is visible only when booting up with HDMI connected</td>
+                <td class="status in-progress">IN PROGRESS</td>
+                <td>Under investigation</td>
+            </tr>
+            <tr>
+                <td>Suspend does not work from the taskbar power menu</td>
+                <td class="status in-progress">IN PROGRESS</td>
+                <td>Under investigation</td>
+            </tr>
+            <tr>
+                <td>Mute status not visible in the taskbar</td>
+                <td class="status in-progress">IN PROGRESS</td>
+                <td>Fix under work</td>
+            </tr>
+            <tr>
+                <td>VPN credentials are not saved</td>
+                <td class="status on-hold">ON HOLD</td>
+                <td>Not clear if this can be fixed</td>
+            </tr>
+            <tr>
+                <td>Keyboard boots up always with English layout</td>
+                <td class="status in-progress">IN PROGRESS</td>
+                <td>Use Alt+Shift to switch between English-Arabic-Finnish layout</td>
+            </tr>
+            <tr>
+                <td>Bluetooth notification windows stay on the screen</td>
+                <td class="status in-progress">IN PROGRESS</td>
+                <td>Use ESC key to remove pop-ups</td>
+            </tr>
+        </tbody>
+    </table>
+        <h1>Environment Requirements</h1>
+        <p>There are no specific requirements for the environment with this release.</p>
+    
+        <h2>Installation Instructions</h2>
+        <p>Released images are available at:</p>
+        <p><a href="https://ghafreleasesstorage.z16.web.core.windows.net/?selected=ghaf-24.09">https://ghafreleasesstorage.z16.web.core.windows.net/?selected=ghaf-24.09</a></p>
+</div>
+</body>
+</html>
