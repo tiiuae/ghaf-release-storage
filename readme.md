@@ -4,7 +4,6 @@
 * We are using Azure web service to host contents
 * Microsoft Defender for security  
 * To manage backup, we are using Azure Backup Vault 
-* For the domain, we are using Azure CDN profiles
 * Azure Cloud based IDE
 
 # How to deploy 
