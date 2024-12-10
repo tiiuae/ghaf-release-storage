@@ -14,7 +14,7 @@
   ```bash
   $ cd ghaf-release-storage
   ```
-- If you dont have Azure CLI Please install:
+- Login to azure via CLI and If you dont have Azure CLI Please install:
   ```bash
   https://search.nixos.org/packages?channel=24.05&show=azure-cli&from=0&size=1&sort=relevance&type=packages&query=azure-cli
 
