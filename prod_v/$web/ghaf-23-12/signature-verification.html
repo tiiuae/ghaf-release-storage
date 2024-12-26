@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signature Verification Instructions</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+      <style>
+        .back-home {
+            display: inline-block;
+          background: linear-gradient(to right, #008000, #5ac379, #90EE90);
+            color: #fff;
+            padding: 10px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div class="container">
+        <a href="index.html" class="back-home">Back to 23.12</a>
+
+    
+    <!--
+        SPDX-FileCopyrightText: 2022-2023 Technology Innovation Institute (TII)
+        SPDX-License-Identifier: Apache-2.0
+    -->
+    
+        <title>Instructions for Signature Verification</title>
+        <link rel="stylesheet" href="Directory%20Listing_files/base.css" type="text/css">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+        <div id="page">
+            <div id="main">
+                <div id="main-header">
+                    <h1 id="title-heading">
+                        <span id="title-text">
+                            Instructions for Signature Verification
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content">
+                    <div id="main-content" class="wiki-content group">
+                        <p>In this example we verify a signature of a 
+Ghaf package which was built and signed by themisto server. These steps 
+can be applied to any Ghaf package.
+                        </p>
+                        <h3>Step-by-Step Instructions:</h3>
+                        <ul>
+                            <li>
+                                <p>
+                                    <strong>Download and extract the package in an empty directory</strong>
+                                </p>
+                                <div class="code panel pdl">
+                                    <div class="codeContent panelContent pdl">
+                                        <pre class="syntaxhighlighter-pre">mkdir verify
+cd verify
+wget https://ghafreleasesstorage.z16.web.core.windows.net/ghaf-23-12/files/ghaf-23.12_PolarFire_RISC-V.tar.xz
+tar -xf *.tar.xz
+cd ghaf-23.12_PolarFire_RISC-V
+cd image
+tar xf *.tar.xz
+ls
+</pre>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <p>
+                                    <strong>Download sha256tree.py script (required for calculating hashes for directory trees)</strong>
+                                </p>
+                                <div class="code panel pdl">
+                                    <div class="codeContent panelContent pdl">
+                                        <pre class="syntaxhighlighter-pre">wget https://raw.githubusercontent.com/tiiuae/ci-public/main/sha256tree/sha256tree.py</pre>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <p>
+                                    <strong>Create the hash of the output directory and convert to binary format</strong>
+                                </p>
+                                <div class="code panel pdl">
+                                    <div class="codeContent panelContent pdl">
+                                        <pre class="syntaxhighlighter-pre">python3 sha256tree.py --plain *-nixos-vm &gt; digest.hex
+xxd -r -p digest.hex digest.bin</pre>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <p>
+                                    <strong>Decode the signature to binary format</strong>
+                                </p>
+                                <div class="code panel pdl">
+                                    <div class="codeContent panelContent pdl">
+                                        <pre class="syntaxhighlighter-pre">openssl enc -base64 -d -in *-zp9p5m*.signature -out signature.bin</pre>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <p>
+                                    <strong>Download the public key for themisto</strong>
+                                </p>
+                                <div class="code panel pdl">
+                                    <div class="codeContent panelContent pdl">
+                                        <pre class="syntaxhighlighter-pre">wget  https://ghafreleasesstorage.z16.web.core.windows.net/keys/themisto.pub</pre>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <p>
+                                    <strong>Verify the signature</strong>
+                                </p>
+                                <div class="code panel pdl">
+                                    <div class="codeContent panelContent pdl">
+                                        <pre class="syntaxhighlighter-pre">openssl dgst -sha256 -verify themisto.pub -signature signature.bin digest.bin</pre>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                       <h3>Example run with output:</h3>
+                        <div class="code panel pdl" style="margin-left: 30px; margin-right: 30px;">
+                            <div class="codeContent panelContent pdl">
+                                <pre class="syntaxhighlighter-pre">
+[karim@nixos:~]$ mkdir verify
+
+[karim@nixos:~]$ cd verify
+
+[karim@nixos:~/verify]$  wget https://ghafreleasesstorage.z16.web.core.windows.net/ghaf-23-12/files/ghaf-23.12_PolarFire_RISC
+-V.tar.xz
+--2024-09-26 00:03:34--  https://ghafreleasesstorage.z16.web.core.windows.net/ghaf-23-12/files/ghaf-23.12_PolarFire_RISC-V.tar.xz
+Resolving ghafreleasesstorage.z16.web.core.windows.net (ghafreleasesstorage.z16.web.core.windows.net)... 20.60.246.36
+Connecting to ghafreleasesstorage.z16.web.core.windows.net (ghafreleasesstorage.z16.web.core.windows.net)|20.60.246.36|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 235232756 (224M) [application/x-xz]
+Saving to: ‘ghaf-23.12_PolarFire_RISC-V.tar.xz’
+
+ghaf-23.12_PolarFire_RISC-V.ta 100%[===================================================>] 224,33M  10,8MB/s    in 21s     
+
+2024-09-26 00:03:56 (10,4 MB/s) - ‘ghaf-23.12_PolarFire_RISC-V.tar.xz’ saved [235232756/235232756]
+
+[karim@nixos:~/verify]$ ls
+ghaf-23.12_PolarFire_RISC-V.tar.xz
+
+[karim@nixos:~/verify]$ tar -xf *.tar.xz
+
+[karim@nixos:~/verify]$ cd ghaf-23.12_PolarFire_RISC-V.tar.xz
+
+[karim@nixos:~/verify/ghaf-23.12_PolarFire_RISC-V.tar.xz]$ cd Image
+
+[karim@nixos:~/verify/ghaf-23.12_PolarFire_RISC-V.tar.xz/Image]$ ls
+18afn723bsrp8jbz4g85nhdmmnsgyymf-cjp22pan106ix31fk168w79zgk0356iw-nixos-sd-image-23.11.20231210.781e2a9-riscv64-linux.img-riscv64-unknown-linux-gnu-themisto.signature
+cjp22pan106ix31fk168w79zgk0356iw-nixos-sd-image-23.11.20231210.781e2a9-riscv64-linux.img-riscv64-unknown-linux-gnu
+cjp22pan106ix31fk168w79zgk0356iw-nixos-sd-image-23.11.20231210.781e2a9-riscv64-linux.img-riscv64-unknown-linux-gnu-themisto-17.tar.xz
+
+[karim@nixos:~/verify/ghaf-23.12_PolarFire_RISC-V.tar.xz/Image]$ tar xf *.tar.xz
+
+[karim@nixos:~/verify/ghaf-23.12_PolarFire_RISC-V.tar.xz/Image]$  wget https://raw.githubusercontent.com/tiiuae/ci-public/main/sha256tree/sha256tree.py
+--2024-09-26 00:07:35--  https://raw.githubusercontent.com/tiiuae/ci-public/main/sha256tree/sha256tree.py
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 2606:50c0:8002::154, 2606:50c0:8000::154, 2606:50c0:8003::154, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|2606:50c0:8002::154|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 4479 (4,4K) [text/plain]
+Saving to: ‘sha256tree.py’
+
+sha256tree.py                  100%[===================================================>]   4,37K  --.-KB/s    in 0s      
+
+2024-09-26 00:07:36 (13,8 MB/s) - ‘sha256tree.py’ saved [4479/4479]
+
+[karim@nixos:~/verify/ghaf-23.12_PolarFire_RISC-V/image]$ python3 sha256tree.py --plain cjp22pan106ix31fk168w79zgk0356iw-nixos-sd-image-23.11.20231210.781e2a9-riscv64-linux.img-riscv64-unknown-linux-gnu > digest.hex
+[karim@nixos:~/verify/ghaf-23.12_PolarFire_RISC-V/image]$ xxd -r -p digest.hex digest.bin
+
+[karim@nixos:~/verify/ghaf-23.12_PolarFire_RISC-V/image]$ openssl enc -base64 -d -in 18afn723bsrp8jbz4g85nhdmmnsgyymf-cjp22pan106ix31fk168w79zgk0356iw-nixos-sd-image-23.11.20231210.781e2a9-riscv64-linux.img-riscv64-unknown-linux-gnu-themisto.signature -out signature.bin
+
+[karim@nixos:~/verify/ghaf-23.12_PolarFire_RISC-V/Image]$ wget  https://ghafreleasesstorage.z16.web.core.windows.net/keys/themisto.pub
+--2024-09-26 00:11:18--  https://ghafreleasesstorage.z16.web.core.windows.net/keys/themisto.pub
+Resolving ghafreleasesstorage.z16.web.core.windows.net (ghafreleasesstorage.z16.web.core.windows.net)... 20.60.246.36
+Connecting to ghafreleasesstorage.z16.web.core.windows.net (ghafreleasesstorage.z16.web.core.windows.net)|20.60.246.36|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 178 [application/octet-stream]
+Saving to: ‘themisto.pub.2’
+
+themisto.pub.2                 100%[===================================================>]     178  --.-KB/s    in 0s      
+
+2024-09-26 00:11:18 (181 MB/s) - ‘themisto.pub’ saved [178/178]
+
+[karim@nixos:~/verify/ghaf-23.12_PolarFire_RISC-V/Image]$ openssl dgst -sha256 -verify themisto.pub -signature signature.bin digest.bin
+Verified OK
+
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</body>
+
+</html>
