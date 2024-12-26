@@ -24,6 +24,6 @@ fi
 end=$(date -u -d "2 hours" '+%Y-%m-%dT%H:%MZ')
 sas_token=$(az storage container generate-sas --account-name $storage_account_name --name "\$web" --permissions acdlrw --expiry $end --output tsv)
 
-azcopy cp "https://$storage_account_name.blob.core.windows.net/$container_name?$sas_token" "$destination_dir" --recursive=true --exclude-pattern="*.tar"
+azcopy cp "https://$storage_account_name.blob.core.windows.net/$container_name?$sas_token" "$destination_dir" --recursive=true --exclude-pattern="*.tar;*.tar.xz"
 
 echo "Files copied successfully to $destination_dir"
