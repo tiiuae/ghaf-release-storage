@@ -1,0 +1,27 @@
+ok let me share my goal with you 
+
+every 2weeks we have a release , in the release we have many artifacts  , for example  
+-aarch64-linux.nvidia-jetson-orin-agx-debug-bpmp 
+aarch64-linux.nvidia-jetson-orin-agx-debug-bpmp 	
+aarch64-linux.nvidia-jetson-orin-nx-debug-bpmp
+aarch64-linux.nvidia-jetson-orin-nx-debug
+aarch64-linux.nxp-imx8mp-evk-debug
+
+now we wan to run this  ./check-artifacts.sh -u https://ghaf-jenkins-controller-release.northeurope.cloudapp.azure.com/artifacts/ghaf-release-pipeline/build_2-commit_40e5ba6995b628057f9e  then this url should  verify each artifact  if these exist files, before announce successfully 
+  "nixos-sd-image-25.05.20241119.23e89b7-aarch64-linux.img.zst.sig"
+        "Binary image signature file"
+        "Verify image signature"
+        "Flash script"
+        "Provenance file"
+        "Provenance signature file"
+        "Verify signature"
+        "SBOM files"
+        "CDX"
+        "SPDX"
+        ".csv"
+        "Test automation results"
+        "Boot"
+        "BAT"
+        "PERF"
+
+        -can you modify the script
