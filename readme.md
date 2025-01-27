@@ -45,6 +45,7 @@ $ bash ./prod_deployment_script.sh
 - If everything succesfully uploads you should see "Resources added successfully"
 
 
-# Go to the ghafreleasesstorage Storage  
+# Post-Deployment  
 
-- Open IDE make codes changes based on new Releases needs
+- Navigate to the ghafreleasesstorage storage.
+- Open the Azure Cloud-based IDE to make any required code changes for the new release.
