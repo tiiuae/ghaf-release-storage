@@ -1,5 +1,5 @@
 # Ghaf-releases-storage Highlights
-* This is Az public storage where we upload our new release images and contents
+* This is Az public storage where we deploy our new release images and contents
 * We are using Azure storage as public storage
 * We are using Azure web service to host contents
 * Microsoft Defender for security  
