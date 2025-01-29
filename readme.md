@@ -14,7 +14,11 @@
   ```bash
   $ cd ghaf-release-storage
   ```
-- Login to azure via CLI and If you dont have Azure CLI Please install:
+  - Downlaods Artifacts to codebase run
+```bash
+$ az login
+```
+-  If you dont have Azure CLI Please install:
   ```bash
   https://search.nixos.org/packages?channel=24.05&show=azure-cli&from=0&size=1&sort=relevance&type=packages&query=azure-cli
 
@@ -48,4 +52,4 @@ $ bash ./prod_deployment_script.sh
 # Post-Deployment  
 
 - Navigate to the ghafreleasesstorage storage.
-- Open the Azure Cloud-based IDE to make any required code changes for the new release.
+- Add new release menu in index
