@@ -1,20 +1,17 @@
 #!/bin/bash
 
-# Verify artifact existence checker
 
-# ANSI color codes
 GREEN='\e[32m'
 RED='\e[31m'
 RESET='\e[0m'
 
-# Base URL and dynamic artifact path
+
 BASE_URL="https://ghaf-jenkins-controller-release.northeurope.cloudapp.azure.com/artifacts/ghaf-release-pipeline/build_2-commit_0f2927810dd0373fbdb8b672e9fb50e945ff5fa6/"
 ARTIFACT_PATH="aarch64-linux.nvidia-jetson-orin-agx-debug/"
 
-# Full URL
 FULL_URL="${BASE_URL}${ARTIFACT_PATH}"
 
-# Expected structure declaration
+#Data Model
 declare -A expected_structure=(
     ["nix-support/hydra-build-products"]=file
     ["nix-support/system"]=file
@@ -42,17 +39,14 @@ declare -A expected_structure=(
     ["root.size"]=file
 )
 
-# Ensure URL ends with /
 [[ "$FULL_URL" != */ ]] && FULL_URL="${FULL_URL}/"
 
 # Track missing files
 declare -a missing_files=()
 
-# Hold for 3 seconds and announce the artifact path
 echo "Checking artifact in ${ARTIFACT_PATH}..."
 sleep 6
 
-# Verify each artifact
 for artifact in "${!expected_structure[@]}"; do
     full_url="${FULL_URL}${artifact}"
     
@@ -66,7 +60,6 @@ for artifact in "${!expected_structure[@]}"; do
     fi
 done
 
-# Print summary
 echo -e "\nVerification complete:"
 if [ ${#missing_files[@]} -eq 0 ]; then
     echo -e "${GREEN}✅ All expected artifacts present!${RESET}"
