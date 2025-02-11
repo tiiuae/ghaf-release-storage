@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Instructions for Signature Verification</title>
+    <link rel="stylesheet" href="/base.css">
+</head>
+<body class="theme-default aui-theme-default">
+    <div id="page">
+        <div id="main">
+            <div id="main-header">
+                <h1 id="title-heading">
+                    <span id="title-text">
+                        Instructions for Signature Verification of the Provenance File
+                    </span>
+                </h1>
+            </div>
+            <div id="content">
+                <div id="main-content" class="wiki-content group">
+                    <p>
+                        In this example we verify the signature of the SLSA provenance file of a Ghaf Lenovo X1 Carbon package.
+                    </p>
+                    <h3>Step-by-step instructions:</h3>
+                    <ul>
+                        <li>
+                            <p><strong>Download and extract the package in an empty directory</strong></p>
+                            <div class="code panel pdl">
+                                <div class="codeContent panelContent pdl">
+                                    <pre class="syntaxhighlighter-pre">
+mkdir verify-sig
+cd verify
+wget https://ghafreleasesstorage.z16.web.core.windows.net/ghaf-24-12-2/files/aarch64-linux.nvidia-jetson-orin-agx-debug.tar
+tar -xf *.tar
+cd aarch64-linux.nvidia-jetson-orin-agx-debug
+cd scs
+                                    </pre>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <p><strong>Verify the signature</strong></p>
+                            <div class="code panel pdl">
+                                <div class="codeContent panelContent pdl">
+                                    <pre class="syntaxhighlighter-pre">
+nix run github:tiiuae/ci-yubi/bdb2dbf#verify -- --path provenance.json --sigfile provenance.json.sig --cert INT-Ghaf-Devenv-Provenance
+                                    </pre>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <h3>Example output of successful signature verification</h3>
+                    <div class="code panel pdl" style="margin-left: 30px; margin-right: 30px;">
+                        <div class="codeContent panelContent pdl">
+                            <pre class="syntaxhighlighter-pre">
+[karim@nixos:~/verify-sg/aarch64-linux.nvidia-jetson-orin-agx-debug/scs]$ nix run github:tiiuae/ci-yubi/bdb2dbf#verify -- --path provenance.json --sigfile provenance.json.sig --cert INT-Ghaf-Devenv-Provenance
+Signature verification result: {'message': 'Signature Verification Result', 'is_valid': True}
+
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
