@@ -88,6 +88,29 @@
             background: #005500; /* Change this color to your desired selected color */
         }
         
+        #ghaf24-menu {
+            list-style-type: none;
+            padding: 20px 0;
+            text-align: left; 
+            padding: 20px 0;
+        }
+        #ghaf24-menu li {
+            display: block;
+            margin: 10px 0;
+        }
+        #ghaf24-menu a {
+            color: #fff; 
+            font-size: 18px;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-family: 'Google Sans',Arial,sans-serif; 
+            display: block;
+            margin-bottom: 10px; 
+        }
+        #ghaf24-menu a.selected {
+            color: #f2f2f2; 
+            background: #005500; /* Change this color to your desired selected color */
+        }
         .left-menu-container {
             background: linear-gradient(to right, #008000, #5ac379, #90EE90);
             width: 200px;
@@ -104,7 +127,7 @@
         <li><a href="ghaf-24-03/">ghaf-24.03</a></li>
         <li><a href="ghaf-24-06/">ghaf-24.06</a></li>
         <li><a id="ghaf-all" href="ghaf-24-09/">ghaf-24.09</a></li>
-        <li><a href="/ghaf-24-12">ghaf-24.12</a></li>
+        <li><a id="ghaf24-all" href="/ghaf-24-12">ghaf-24.12</a></li>
     </ul>
     <div class="content">
         <div class="left-menu-container">
@@ -117,61 +140,68 @@
                
                 <!--<li><a href="#">More</a></li>-->
             </ul>
+
+            <ul id="ghaf24-menu" style="display: none;">
+                  <li><a href="/ghaf-24-12">ghaf-24.12</a></li>
+                <li><a href="/ghaf-24-12-01">ghaf-24.12.01</a></li>
+				<li><a href="/ghaf-24-12-2">ghaf-24.12.2</a></li>
+               <!--<li><a href="#">More</a></li>-->
+           </ul>
+
         </div>
     </div>
   
-     <script>
-        var isLeftMenuVisible = false; 
+  <script>
+    // Handle parent menu clicks and toggle corresponding child menus
+    const menuPairs = [
+        { parentId: 'ghaf-all', childId: 'left-menu' },
+        { parentId: 'ghaf24-all', childId: 'ghaf24-menu' }
+    ];
 
-        document.getElementById('ghaf-all').addEventListener('click', function(event) {
+    menuPairs.forEach(pair => {
+        const parent = document.getElementById(pair.parentId);
+        const childMenu = document.getElementById(pair.childId);
+
+        parent.addEventListener('click', function(event) {
             event.preventDefault();
-            var leftMenu = document.getElementById('left-menu');
+            const isVisible = childMenu.style.display === 'block';
+            
+            // Close all child menus first
+            menuPairs.forEach(p => {
+                const cm = document.getElementById(p.childId);
+                cm.style.display = 'none';
+                cm.removeAttribute('data-visible');
+            });
 
-            if (isLeftMenuVisible) {
-                leftMenu.style.display = 'none';
-                isLeftMenuVisible = false; 
-            } else {
-                leftMenu.style.display = 'block'; 
-                isLeftMenuVisible = true; 
-            }
+            // Toggle current menu
+            childMenu.style.display = isVisible ? 'none' : 'block';
+            childMenu.toggleAttribute('data-visible', !isVisible);
+
+            // Update selected state for parent menu items
+            document.querySelectorAll('.menu a').forEach(a => {
+                a.classList.toggle('selected', a === parent);
+            });
         });
+    });
 
-        // Get all menu links
-        var menuLinks = document.querySelectorAll('.menu a');
+    // Generic function to handle selection for any menu group
+    function handleMenuSelection(event) {
+        const menuItem = event.target;
+        const menuGroup = menuItem.closest('ul');
+        
+        // Remove selection from all items in the same menu group
+        menuGroup.querySelectorAll('a').forEach(a => {
+            a.classList.remove('selected');
+        });
+        
+        // Add selection to clicked item
+        menuItem.classList.add('selected');
+    }
 
-        // Add click event listener to each link
-        for (var i = 0; i < menuLinks.length; i++) {
-            menuLinks[i].addEventListener('click', function(event) {
-                // Only prevent default for the toggling link
-                if (this.id === 'ghaf-all') {
-                    event.preventDefault();
-                }
-
-                // Remove the 'selected' class from all links
-                for (var j = 0; j < menuLinks.length; j++) {
-                    menuLinks[j].classList.remove('selected');
-                }
-
-                // Add the 'selected' class to the clicked link
-                this.classList.add('selected');
-            });
-        }
-
-        // Get all left menu links
-        var leftMenuLinks = document.querySelectorAll('#left-menu a');
-
-        // Add click event listener to each left menu link
-        for (var k = 0; k < leftMenuLinks.length; k++) {
-            leftMenuLinks[k].addEventListener('click', function(event) {
-                // Remove the 'selected' class from all left menu links
-                for (var l = 0; l < leftMenuLinks.length; l++) {
-                    leftMenuLinks[l].classList.remove('selected');
-                }
-
-                // Add the 'selected' class to the clicked left menu link
-                this.classList.add('selected');
-            });
-        }
-    </script>
+    // Apply selection handling to all menu items
+    document.querySelectorAll('.menu a, #left-menu a, #ghaf24-menu a').forEach(item => {
+        item.addEventListener('click', handleMenuSelection);
+    });
+</script>
 </body>
 </html>
