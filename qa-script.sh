@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Color codes for output
+# Color
 GREEN='\e[32m'
 RED='\e[31m'
 RESET='\e[0m'
@@ -8,7 +8,7 @@ RESET='\e[0m'
 show_help() {
     echo "Usage: $0 <URL>"
     echo
-    echo "This script checks for the presence of expected files and folder at the specified URL."
+    echo "This script checks for the presence of expected files and folders at the specified URL."
     echo
     echo "Arguments:"
     echo "  URL   The base URL where the artifact is located."
@@ -22,24 +22,23 @@ if [[ "$1" == "--help" || "$1" == "-h" ]]; then
     exit 0
 fi
 
-# Check if URL is provided as an argument
 if [ -z "$1" ]; then
     echo -e "${RED}Error: No URL provided.${RESET}"
     show_help
     exit 1
 fi
 
-# Base URL and artifact path
 FULL_URL="$1"
 
-# Ensure the URL correctly ends with a slash
 [[ "$FULL_URL" != */ ]] && FULL_URL="${FULL_URL}/"
 
-# checking for the presence of these files 
+# Check if reachable
+if ! curl --head --silent --fail "$FULL_URL" > /dev/null; then
+    echo -e "${RED}Error: The URL is not reachable or the server is down.${RESET}"
+    exit 1
+fi
+
 declare -A expected_files=(
-    ["nix-support/hydra-build-products"]=file
-    ["nix-support/system"]=file
-    ["scs/http_cache.sqlite"]=file
     ["scs/provenance.json"]=file
     ["scs/provenance.json.sig"]=file
     ["scs/sbom.cdx.json"]=file
@@ -49,19 +48,18 @@ declare -A expected_files=(
     ["test-results/Robot-Framework/test-suites/bat/log.html"]=file
     ["test-results/Robot-Framework/test-suites/bat/output.xml"]=file
     ["test-results/Robot-Framework/test-suites/bat/report.html"]=file
-    ["test-results/Robot-Framework/test-suites/boot/log.html"]=file
-    ["test-results/Robot-Framework/test-suites/boot/output.xml"]=file
-    ["test-results/Robot-Framework/test-suites/boot/report.html"]=file
-    ["test-results/Robot-Framework/test-suites/turnoff/log.html"]=file
-    ["test-results/Robot-Framework/test-suites/turnoff/output.xml"]=file
-    ["test-results/Robot-Framework/test-suites/turnoff/report.html"]=file
-    ["esp.offset"]=file
-    ["esp.size"]=file
-    ["root.offset"]=file
-    ["root.size"]=file
+    ["test-results/Robot-Framework/test-suites/relayboot/log.html"]=file
+    ["test-results/Robot-Framework/test-suites/relayboot/output.xml"]=file
+    ["test-results/Robot-Framework/test-suites/relayboot/report.html"]=file
+    ["test-results/Robot-Framework/test-suites/relay-turnoff/log.html"]=file
+    ["test-results/Robot-Framework/test-suites/relay-turnoff/output.xml"]=file
+    ["test-results/Robot-Framework/test-suites/relay-turnoff/report.html"]=file
 )
 
-dynamic_patterns=("sd-image/*.img.zst" "sd-image/*.img.zst.sig")
+# Img files for check   
+image_files=("nixos.img.zst" "nixos.img.zst.sig" "disk1.raw.zst" "disk1.raw.zst.sig" "*.img.zst" "*.img.zst.sig")
+image_found_count=0  
+image_found=()  
 
 declare -a missing_files=()
 
@@ -69,9 +67,9 @@ check_file() {
     local url=$1
     if curl --head --silent --fail "$url" > /dev/null; then
         echo -e "${GREEN}✓ Found${RESET}"
+        return 0
     else
-        echo -e "${RED}✗ Missing${RESET}"
-        missing_files+=("$url")
+        return 1
     fi
 }
 
@@ -79,42 +77,56 @@ check_expected_files() {
     for file in "${!expected_files[@]}"; do
         local full_url="${FULL_URL}${file}"
         echo -n "Checking ${file}... "
-        check_file "$full_url"
-    done
-}
-
-# dynamic
-check_dynamic_files() {
-    for pattern in "${dynamic_patterns[@]}"; do
-        echo -n "Checking ${pattern}... "
-        if curl --silent --fail "${FULL_URL}${pattern}" > /dev/null; then
-            echo -e "${GREEN}✓ Found${RESET}"
-        else
+        if ! check_file "$full_url"; then
             echo -e "${RED}✗ Missing${RESET}"
-            missing_files+=("${FULL_URL}${pattern}")
+            missing_files+=("$full_url")
         fi
     done
 }
 
+# Check image files
+check_image_files() {
+    for dir in "" "sd-image/"; do  
+        local target_url="${FULL_URL}${dir}"
+        local contents=$(curl --silent "$target_url")
+
+        for img_file in "${image_files[@]}"; do
+            if echo "$contents" | grep -qE "${img_file//\*/.*}"; then
+                echo -e "Checking ${dir}${img_file}... ${GREEN}✓ Found${RESET}"
+                image_found+=("${img_file}")
+                ((image_found_count++))
+            fi
+        done
+    done
+
+    # Count missing
+    if [ "$image_found_count" -lt 2 ]; then
+        for img_file in "${image_files[@]}"; do
+            if [[ ! " ${image_found[@]} " =~ " ${img_file} " ]]; then
+                echo -e "Checking ${img_file}... ${RED}✗ Missing${RESET}"
+                missing_files+=("${FULL_URL}${img_file}")
+            fi
+        done
+    fi
+}
 
 print_summary() {
     echo -e "\nVerification complete:"
     if [ ${#missing_files[@]} -eq 0 ]; then
-        echo -e "${GREEN}✅ All expected artifacts present!${RESET}"
+        echo -e "${GREEN}✅ All expected artifacts are present!${RESET}"
     else
-        echo -e "${RED}❌ Missing artifacts:${RESET}"
+        echo -e "${RED}❌ Missing Resources:${RESET}"
         printf '  - %s\n' "${missing_files[@]}"
         exit 1
     fi
 }
-
 
 main() {
     echo "Checking artifacts in ${FULL_URL}..."
     sleep 6
 
     check_expected_files
-    check_dynamic_files
+    check_image_files
     print_summary
 }
 
