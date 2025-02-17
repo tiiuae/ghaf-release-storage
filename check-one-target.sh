@@ -11,7 +11,7 @@ show_help() {
     echo "This script checks for the presence of expected files and folders at the specified URL."
     echo
     echo "Arguments:"
-    echo "  URL   The base URL where the artifact is located."
+    echo "  URL   The base URL where the artifacts are located."
     echo
     echo "Example:"
     echo "  $0 https://example.com/artifacts/path/"
