@@ -105,7 +105,6 @@ get_recursively () {
         --accept '*' \
         --random-wait \
         --no-host-directories \
-        --no-directories \
         --directory-prefix="$outdir" \
         --quiet --show-progress --progress=bar:force \
         "$url/";
