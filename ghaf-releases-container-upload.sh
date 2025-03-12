@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Variables
 STORAGE_ACCOUNT_NAME="ghafreleasesstorage"
