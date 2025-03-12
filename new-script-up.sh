@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 storage_account_name="ghafreleasesstorage"
 container_name="\$web"
