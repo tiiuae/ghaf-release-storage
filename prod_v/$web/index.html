@@ -115,6 +115,29 @@
             background: linear-gradient(to right, #008000, #5ac379, #90EE90);
             width: 200px;
         }
+		#ghaf25-menu {
+     list-style-type: none;
+     padding: 20px 0;
+     text-align: left;
+     padding: 20px 0;
+ }
+ #ghaf25-menu li {
+     display: block;
+     margin: 10px 0;
+ }
+ #ghaf25-menu a {
+     color: #fff;
+     font-size: 18px;
+     text-decoration: none;
+     padding: 10px 20px;
+     font-family: 'Google Sans',Arial,sans-serif;
+     display: block;
+     margin-bottom: 10px;
+ }
+ #ghaf25-menu a.selected {
+     color: #f2f2f2;
+     background: #005500; /* Change this color to your desired selected color */
+ }
     </style>
 </head>
 <body>
@@ -128,7 +151,7 @@
         <li><a href="ghaf-24-06/">ghaf-24.06</a></li>
         <li><a id="ghaf-all" href="ghaf-24-09/">ghaf-24.09</a></li>
         <li><a id="ghaf24-all" href="/ghaf-24-12">ghaf-24.12</a></li>
-    </ul>
+		    <li><a id="ghaf25-all" href="/ghaf-25-03">ghaf-25.03</a></li>   
     <div class="content">
         <div class="left-menu-container">
             <ul id="left-menu" style="display: none;">
@@ -149,7 +172,9 @@
 				<li><a href="/ghaf-24.12.4">ghaf-24.12.4</a></li>
                <!--<li><a href="#">More</a></li>-->
            </ul>
-
+ <ul id="ghaf25-menu" style="display: none;">               
+     <li><a href="/ghaf-25-03">ghaf-25.03</a></li>          
+</ul>
         </div>
     </div>
   
@@ -157,7 +182,8 @@
     // Handle parent menu clicks and toggle corresponding child menus
     const menuPairs = [
         { parentId: 'ghaf-all', childId: 'left-menu' },
-        { parentId: 'ghaf24-all', childId: 'ghaf24-menu' }
+        { parentId: 'ghaf24-all', childId: 'ghaf24-menu' },
+		{ parentId: 'ghaf25-all', childId: 'ghaf25-menu' }
     ];
 
     menuPairs.forEach(pair => {
@@ -201,7 +227,7 @@
     }
 
     // Apply selection handling to all menu items
-    document.querySelectorAll('.menu a, #left-menu a, #ghaf24-menu a').forEach(item => {
+    document.querySelectorAll('.menu a, #left-menu a, #ghaf24-menu a, #ghaf25-menu a').forEach(item => {
         item.addEventListener('click', handleMenuSelection);
     });
 </script>
